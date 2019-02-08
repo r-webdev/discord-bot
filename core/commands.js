@@ -1,4 +1,5 @@
 const discord = require('./client');
+const LOADER = require('./module-loader');
 
 const registeredCommands = [];
 let prefix = '!';
@@ -41,11 +42,11 @@ exports.getAllCommands = () => registeredCommands;
 discord.client.on('message', (msg) => {
   const message = msg.content;
   for (let i = 0; i < registeredCommands.length; i += 1) {
-    const c = registeredCommands[i];
-    const r = new RegExp(`${prefix}${c.compiled}`);
+    const command = registeredCommands[i];
+    const r = new RegExp(`${prefix}${command.compiled}`);
     const match = message.match(r) ? message.match(r) : [];
-    if (`${prefix}${c.compiled}` === message || match[1]) {
-      return c.response(msg, match);
+    if (LOADER.getState(command) && (`${prefix}${command.compiled}` === message || match[1])) {
+      return command.response(msg, match);
     }
   }
   return null;
