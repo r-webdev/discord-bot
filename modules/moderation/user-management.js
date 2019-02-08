@@ -21,4 +21,4 @@ exports.description = 'Basic User Management Module';
 exports.command = 'mod';
 exports.discrim = 'usermanagement';
 exports.state = true;
-exports.toggle = () => !this.state
+exports.toggle = () => this.state = !this.state;

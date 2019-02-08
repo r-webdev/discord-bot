@@ -22,4 +22,4 @@ exports.description = 'Basic Ping Pong Module';
 exports.command = 'ping';
 exports.discrim = 'pingpong';
 exports.state = true;
-exports.toggle = () => !this.state
+exports.toggle = () => this.state = !this.state;
