@@ -15,4 +15,4 @@ commands.register('customize', ['command', 'prefix', '(.*)'], 'Change the bots c
   msg.reply(`Set prefix to: ${extra[1]}`);
 });
 
-console.log('Registered Customize Module');
+console.log(`Loaded Customize Module`);

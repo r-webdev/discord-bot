@@ -17,4 +17,4 @@ commands.register('ping', ['pong', 'ping', 'pong'], 'Ping the bot', (msg) => {
   msg.reply('PING');
 });
 
-console.log('Registered Ping-Pong Module');
+console.log(`Loaded Ping-Pong Module`);
