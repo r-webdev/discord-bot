@@ -35,6 +35,8 @@ exports.setPrefix = (newPrefix) => {
   prefix = newPrefix;
 };
 
+exports.getPrefix = () => prefix;
+
 exports.getCommands = command => registeredCommands.filter(e => e.command === command);
 
 exports.getAllCommands = () => registeredCommands;

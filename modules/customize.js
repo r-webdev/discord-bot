@@ -1,8 +1,11 @@
 const commands = require('../core/commands');
 const { client } = require('../core/client');
+const LOADER = require('../core/module-loader');
+
+exports.command = 'customize';
 
 commands.register(this.command, '', 'Customize Help', (msg) => {
-  msg.reply('Customize the bot with other commands!');
+  msg.channel.send(LOADER.getModuleHelp('customize'));
 });
 
 commands.register(this.command, 'game (.*)', 'Change the bots game', (msg, extra) => {
@@ -18,7 +21,6 @@ commands.register(this.command, ['command', 'prefix', '(.*)'], 'Change the bots 
 exports.name = 'Customize';
 exports.version = '1.0.0';
 exports.description = 'Customize the bot';
-exports.command = 'customize';
 exports.discrim = 'customize';
 exports.state = true;
 exports.toggle = () => this.state = !this.state;

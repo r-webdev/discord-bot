@@ -2,6 +2,8 @@ const LOADER = require('../core/module-loader');
 const commands = require('../core/commands');
 const { discord } = require('../core/client');
 
+exports.command = 'modules';
+
 commands.register(this.command, 'toggle (.*)', 'Toggle a module.', (msg, extra) => {
   const module = LOADER.getModule(extra[1]);
   if (module) {
@@ -32,5 +34,4 @@ commands.register(this.command, '', 'Get a list of module discriminators', (msg)
 });
 
 exports.name = 'Module Loader';
-exports.command = 'modules';
 exports.state = true;

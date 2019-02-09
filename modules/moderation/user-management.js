@@ -1,6 +1,8 @@
 const commands = require('../../core/commands');
 const { discord } = require('../../core/client');
 
+exports.command = 'mod';
+
 commands.register(this.command, '', 'Customize Help', (msg) => {
   msg.reply('Customize the bot with other commands!');
 });
@@ -18,7 +20,6 @@ commands.register(this.command, 'info (.*)', 'Customize Help', (msg, extra) => {
 exports.name = 'User-Management';
 exports.version = '1.0.0';
 exports.description = 'Basic User Management Module';
-exports.command = 'mod';
 exports.discrim = 'usermanagement';
 exports.state = true;
 exports.toggle = () => this.state = !this.state;

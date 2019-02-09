@@ -1,5 +1,7 @@
 const commands = require('../core/commands');
 
+exports.command = 'ping';
+
 commands.register(this.command, '', 'Ping the bot', (msg) => {
   msg.reply('PONG');
 });
@@ -19,7 +21,6 @@ commands.register(this.command, ['pong', 'ping', 'pong'], 'Ping the bot', (msg) 
 exports.name = 'Ping-Pong';
 exports.version = '1.0.0';
 exports.description = 'Basic Ping Pong Module';
-exports.command = 'ping';
 exports.discrim = 'pingpong';
 exports.state = true;
 exports.toggle = () => this.state = !this.state;
