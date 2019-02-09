@@ -1,11 +1,11 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const LOGGER = require('./logger');
-
-const key = '<KEY>';
+console.log(process.env.DISCORD_KEY);
+const key = process.env.DISCORD_KEY;
 
 client.on('ready', () => {
-  client.user.setActivity("Powered By Node");
+  client.user.setActivity("cowsay");
   LOGGER.log('notify', 'Bot Started');
 });
 

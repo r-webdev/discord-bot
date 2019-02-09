@@ -1,3 +1,5 @@
+// Load configuration.
+require('dotenv').config();
 const LOADER = require('./core/module-loader');
 const logger = require('./core/logger');
 
