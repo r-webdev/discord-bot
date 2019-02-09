@@ -1,11 +1,10 @@
-const commands = require('../core/commands');
-const { discord } = require('../core/client');
-const LOADER = require('../core/module-loader');
+const { commands, loader } = require('@bot');
+const { discord } = require('@bot').client;
 
 exports.command = 'help';
 
 commands.register(this.command, '', 'Shows the help message', (msg) => {
-  const modules = LOADER.getModules();
+  const modules = loader.getModules();
   const em = new discord.RichEmbed();
   modules.forEach(m => {
     if (m.discrim) {
@@ -16,7 +15,7 @@ commands.register(this.command, '', 'Shows the help message', (msg) => {
 });
 
 commands.register(this.command, '(.*)', 'Shows the help message', (msg, extra) => {
-  msg.channel.send(LOADER.getModuleHelp(extra[1]));
+  msg.channel.send(commands.getModuleHelp(extra[1]));
 });
 
 exports.name = 'Help';

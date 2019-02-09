@@ -1,11 +1,10 @@
-const commands = require('../core/commands');
-const { client } = require('../core/client');
-const LOADER = require('../core/module-loader');
+const { commands } = require('@bot');
+const { client } = require('@bot').client;
 
 exports.command = 'customize';
 
 commands.register(this.command, '', 'Customize Help', (msg) => {
-  msg.channel.send(LOADER.getModuleHelp('customize'));
+  msg.channel.send(commands.getModuleHelp('customize'));
 });
 
 commands.register(this.command, 'game (.*)', 'Change the bots game', (msg, extra) => {

@@ -1,5 +1,5 @@
-const commands = require('../../core/commands');
-const { discord } = require('../../core/client');
+const { commands } = require('@bot');
+const { discord } = require('@bot').client;
 
 exports.command = 'mod';
 

@@ -1,4 +1,4 @@
-const commands = require('../core/commands');
+const { commands } = require('@bot');
 
 exports.command = 'ping';
 
