@@ -1,5 +1,6 @@
 const discord = require('./client');
 const LOADER = require('./module-loader');
+const database = require('./database');
 
 const registeredCommands = [];
 let prefix = '!';
