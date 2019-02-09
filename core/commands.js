@@ -1,6 +1,5 @@
-const discord = require('./client');
-const LOADER = require('./module-loader');
-const database = require('./database');
+const { loader } = require('@bot');
+const { discord, client } = require('@bot').client;
 
 const registeredCommands = [];
 let prefix = '!';
@@ -42,13 +41,28 @@ exports.getCommands = command => registeredCommands.filter(e => e.command === co
 
 exports.getAllCommands = () => registeredCommands;
 
-discord.client.on('message', (msg) => {
+exports.getModuleHelp = (discrim) => {
+  const module = loader.getModule(discrim);
+  if (module) {
+    const em = new discord.RichEmbed();
+    const moduleCommands = this.getCommands(module.command);
+    em.setTitle(`${module.name} | Help`);
+    moduleCommands.forEach(c => {
+      em.addField(`${this.getPrefix()}${c.command} ${c.params}`, `${c.description}`)
+    });
+    return em;
+  } else {
+    return `Are you sure that \`${discrim}\` is a valid module descriminator`;
+  }
+}
+
+client.on('message', (msg) => {
   const message = msg.content;
   for (let i = 0; i < registeredCommands.length; i += 1) {
     const command = registeredCommands[i];
     const r = new RegExp(`${prefix}${command.compiled}`);
     const match = message.match(r) ? message.match(r) : [];
-    if (LOADER.getState(command) && (`${prefix}${command.compiled}` === message || match[1])) {
+    if (loader.getState(command) && (`${prefix}${command.compiled}` === message || match[1])) {
       return command.response(msg, match);
     }
   }

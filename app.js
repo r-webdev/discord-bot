@@ -1,7 +1,13 @@
 // Load configuration.
 require('dotenv').config();
-const LOADER = require('./core/module-loader');
-const logger = require('./core/logger');
 
-LOADER.loadModules();
-logger.log('store', 'Bot Started', new Date());
+//load @bot hooks
+require('./core/bootstrap');
+
+const { loader } = require('@bot');
+const { log } = require('@bot').logger;
+
+log('notify', `BOTKEY: [${process.env.DISCORD_KEY}]`);
+log('notify', `MONGO: [${process.env.MONGODB_URL}]`);
+
+loader.loadModules();
