@@ -1,10 +1,16 @@
 const { commands } = require('@bot');
-const { client } = require('@bot').client;
+const { client, discord } = require('@bot').client;
 
 exports.command = 'customize';
 
 commands.register(this.command, '', 'Customize Help', (msg) => {
-  msg.channel.send(commands.getModuleHelp('customize'));
+  const pluginCommands = commands.getCommands('customize');
+  const em = new discord.RichEmbed();
+  em.setTitle(`Customize | Help`);
+  pluginCommands.forEach(c => {
+    em.addField(`${commands.getPrefix()}${c.command} ${c.params}`, `${c.description}`)
+  });
+  msg.channel.send(em);
 });
 
 commands.register(this.command, 'game (.*)', 'Change the bots game', (msg, extra) => {

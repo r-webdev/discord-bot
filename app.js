@@ -10,4 +10,4 @@ const { log } = require('@bot').logger;
 log('notify', `BOTKEY: [${process.env.DISCORD_KEY}]`);
 log('notify', `MONGO: [${process.env.MONGODB_URL}]`);
 
-loader.loadModules();
+loader.init();

@@ -18,13 +18,13 @@ npm start
 
 Once the bot is started up, [follow these instructions](https://discordapp.com/developers/docs/topics/oauth2#bots) to invite him to your server. 
 
-## Official Modules
+## Official Plugins
 
-Thanks to initial work by Papaya, adding new commands is done via modules in the `modules/` directory. For a good example, check out `modules/ping-pong.js`. 
+Thanks to initial work by Papaya, adding new commands is done via plugins in the `plugins/` directory. For a good example, check out `plugins/ping-pong.js`. 
 
-| Module name   | File name       | About                                           |
+| Plugin name   | File name       | About                                           |
 |---------------|-----------------|-------------------------------------------------|
-| Customize     | customize.js    | Customizes the bot, e.g prefix or "now playing" |
+| Customize     | customize.js    | Customizes the bot, e.g prefix or "now playing" |       
 | Help          | help.js         | Displays help messages                          |
-| Module Helper | modulehelper.js | Toggle or view status of various modules        |
+| Plugin Helper | plugin-helper.js | Toggle or view status of various plugins       |
 | Ping Pong     | ping-pong.js    | Responds to !ping with PONG                     |
