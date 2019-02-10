@@ -18,10 +18,13 @@ commands.register(this.command, 'game (.*)', 'Change the bots game', (msg, extra
   msg.reply(`Set game to: ${extra[1]}`);
 });
 
+/*
+Add back once permissions done. 
 commands.register(this.command, ['command', 'prefix', '(.*)'], 'Change the bots command Prefix', (msg, extra) => {
   commands.setPrefix(extra[1]);
   msg.reply(`Set prefix to: ${extra[1]}`);
 });
+*/
 
 exports.name = 'Customize';
 exports.version = '1.0.0';
