@@ -35,26 +35,9 @@ exports.setPrefix = (newPrefix) => {
   prefix = newPrefix;
 };
 
-exports.getPrefix = () => prefix;
-
 exports.getCommands = command => registeredCommands.filter(e => e.command === command);
 
 exports.getAllCommands = () => registeredCommands;
-
-exports.getModuleHelp = (discrim) => {
-  const module = loader.getModule(discrim);
-  if (module) {
-    const em = new discord.RichEmbed();
-    const moduleCommands = this.getCommands(module.command);
-    em.setTitle(`${module.name} | Help`);
-    moduleCommands.forEach(c => {
-      em.addField(`${this.getPrefix()}${c.command} ${c.params}`, `${c.description}`)
-    });
-    return em;
-  } else {
-    return `Are you sure that \`${discrim}\` is a valid module descriminator`;
-  }
-}
 
 client.on('message', (msg) => {
   const message = msg.content;
@@ -62,7 +45,8 @@ client.on('message', (msg) => {
     const command = registeredCommands[i];
     const r = new RegExp(`${prefix}${command.compiled}`);
     const match = message.match(r) ? message.match(r) : [];
-    if (loader.getState(command) && (`${prefix}${command.compiled}` === message || match[1])) {
+    const plugin = loader.getPlugin(match[1]);
+    if (plugin.state && (`${prefix}${command.compiled}` === message || match[1])) {
       return command.response(msg, match);
     }
   }

@@ -13,8 +13,7 @@ database.once('open', function () {
 });
 
 const Server = mongoose.model('Server', {
-  id: Number,
-  name: String
+  serverID: Number
 });
 
 const User = mongoose.model('User', {
@@ -28,13 +27,9 @@ const User = mongoose.model('User', {
 const Configuration = mongoose.model('Configuration', {
   server: { type: Schema.Types.ObjectId, ref: 'Server' },
   prefix: String,
-  adminRole: String,
-  help: String
+  adminRole: Number
 });
 
 module.exports = {
-  server: Server,
-  user: User,
-  configuration: Configuration,
-  database: database
+  Server, User, Configuration, database
 };

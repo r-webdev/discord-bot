@@ -19,7 +19,7 @@ commands.register(this.command, 'info (.*)', 'Customize Help', (msg, extra) => {
 
 exports.name = 'User-Management';
 exports.version = '1.0.0';
-exports.description = 'Basic User Management Module';
+exports.description = 'Basic User Management Plugin';
 exports.discrim = 'usermanagement';
 exports.state = true;
 exports.toggle = () => this.state = !this.state;
