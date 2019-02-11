@@ -13,7 +13,7 @@ database.once('open', function () {
 });
 
 const Server = mongoose.model('Server', {
-  serverID: Number
+  serverID: Number,
 });
 
 const User = mongoose.model('User', {

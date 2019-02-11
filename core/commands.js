@@ -1,5 +1,6 @@
 const { loader } = require('@bot');
 const { discord, client } = require('@bot').client;
+const { Server, Configuration } = require('@bot').database;
 
 const registeredCommands = [];
 let prefix = '!';
@@ -31,13 +32,19 @@ exports.register = (command, params, description, response) => {
   }
 };
 
-exports.setPrefix = (newPrefix) => {
-  prefix = newPrefix;
+exports.setPrefix = async (serverID, newPrefix) => {
+  const server = await Server.findOne({ serverID });
+  const config = await Configuration.updateOne({ server }, { prefix: newPrefix });
+  return config ? config.n >= 1 : false;
 };
 
 exports.getCommands = command => registeredCommands.filter(e => e.command === command);
 
-exports.getPrefix = () => prefix;
+exports.getPrefix = async (serverID) => {
+  const server = await Server.findOne({ serverID });
+  const config = await Configuration.findOne({ server });
+  return config ? config.prefix : prefix;
+};
 
 exports.getAllCommands = () => registeredCommands;
 

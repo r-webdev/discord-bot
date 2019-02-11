@@ -9,8 +9,8 @@ core.hook('client', client);
 const loader = require('./plugin-loader');
 core.hook('loader', loader);
 
-const commands = require('./commands');
-core.hook('commands', commands);
-
 const database = require('./database');
 core.hook('database', database);
+
+const commands = require('./commands');
+core.hook('commands', commands);
