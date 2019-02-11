@@ -48,14 +48,15 @@ exports.getPrefix = async (serverID) => {
 
 exports.getAllCommands = () => registeredCommands;
 
-client.on('message', (msg) => {
+client.on('message', async (msg) => {
   const message = msg.content;
+  const serverPrefix = await this.getPrefix(msg.guild.id);
   for (let i = 0; i < registeredCommands.length; i += 1) {
     const command = registeredCommands[i];
-    const r = new RegExp(`${prefix}${command.compiled}`);
+    const r = new RegExp(`\\${serverPrefix}${command.compiled}`);
     const match = message.match(r) ? message.match(r) : [];
     const plugin = loader.commandState(command);
-    if (plugin && (`${prefix}${command.compiled}` === message || match[1])) {
+    if (plugin && (`${serverPrefix}${command.compiled}` === message || match[1])) {
       return command.response(msg, match);
     }
   }
