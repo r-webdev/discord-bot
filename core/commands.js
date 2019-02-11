@@ -37,6 +37,8 @@ exports.setPrefix = (newPrefix) => {
 
 exports.getCommands = command => registeredCommands.filter(e => e.command === command);
 
+exports.getPrefix = () => prefix;
+
 exports.getAllCommands = () => registeredCommands;
 
 client.on('message', (msg) => {
@@ -45,8 +47,8 @@ client.on('message', (msg) => {
     const command = registeredCommands[i];
     const r = new RegExp(`${prefix}${command.compiled}`);
     const match = message.match(r) ? message.match(r) : [];
-    const plugin = loader.getPlugin(match[1]);
-    if (plugin.state && (`${prefix}${command.compiled}` === message || match[1])) {
+    const plugin = loader.commandState(command);
+    if (plugin && (`${prefix}${command.compiled}` === message || match[1])) {
       return command.response(msg, match);
     }
   }

@@ -25,7 +25,7 @@ commands.register(this.command, '(.*)', 'Shows the help message', (msg, extra) =
     });
     return msg.channel.send(em);
   } else {
-    return msg.channel.send(`Are you sure that \`${discrim}\` is a valid plugin descriminator`);
+    return msg.channel.send(`Are you sure that \`${extra[1]}\` is a valid plugin descriminator`);
   }
 });
 

@@ -29,6 +29,6 @@ exports.init = () => {
 
 exports.getPlugins = () => loadedPlugins;
 
-//exports.getState = ({ command }) => loadedPlugins.filter(m => m.command === command && m.state === true).length > 0;
+exports.commandState = ({ command }) => loadedPlugins.filter(m => m.command === command && m.state === true).length > 0;
 
 exports.getPlugin = (discrim) => loadedPlugins.filter(m => m.discrim === discrim)[0];
