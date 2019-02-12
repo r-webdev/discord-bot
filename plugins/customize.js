@@ -3,12 +3,13 @@ const { client, discord } = require('@bot').client;
 
 exports.command = 'customize';
 
-commands.register(this.command, '', 'Customize Help', (msg) => {
+commands.register(this.command, '', 'Customize Help', async (msg) => {
   const pluginCommands = commands.getCommands('customize');
   const em = new discord.RichEmbed();
+  const prefix = await commands.getPrefix();
   em.setTitle(`Customize | Help`);
   pluginCommands.forEach(c => {
-    em.addField(`${commands.getPrefix()}${c.command} ${c.params}`, `${c.description}`)
+    em.addField(`${prefix}${c.command} ${c.params}`, `${c.description}`)
   });
   msg.channel.send(em);
 });
@@ -19,7 +20,7 @@ commands.register(this.command, 'game (.*)', 'Change the bots game', (msg, extra
 });
 
 
-commands.register(this.command, ['command', 'prefix', '(.*)'], 'Change the bots command Prefix', async (msg, extra) => {
+commands.register(this.command, 'command prefix (.*)', 'Change the bots command Prefix', async (msg, extra) => {
   const changed = await commands.setPrefix(msg.guild.id, extra[1]);
   changed ? msg.reply(`Set prefix to: ${extra[1]}`) : msg.reply(`Could not update the prefix, did you run {!install}?`);
 });

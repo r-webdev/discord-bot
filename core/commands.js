@@ -15,9 +15,6 @@ const checkCommand = (command, body) => {
   return true;
 };
 
-// Cleanest way to allow [] for param chaining...
-Array.prototype.toString = function () { return this.join(' '); };
-
 exports.register = (command, params, description, response) => {
   const compiled = params === '' ? `${command}` : `${command} ${params}`;
 

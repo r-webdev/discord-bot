@@ -10,11 +10,11 @@ commands.register(this.command, 'pong', 'Pong the bot', (msg) => {
   msg.reply('PING');
 });
 
-commands.register(this.command, ['pong', 'ping', 'pong', 'ping'], 'Pong the bot', (msg) => {
+commands.register(this.command, 'pong ping pong ping', 'Pong the bot', (msg) => {
   msg.reply('PONG');
 });
 
-commands.register(this.command, ['pong', 'ping', 'pong'], 'Ping the bot', (msg) => {
+commands.register(this.command, 'pong ping pong', 'Ping the bot', (msg) => {
   msg.reply('PING');
 });
 
