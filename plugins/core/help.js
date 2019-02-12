@@ -15,14 +15,15 @@ commands.register(this.command, '', 'Shows the help message', async (msg) => {
   msg.reply(em);
 });
 
-commands.register(this.command, '(.*)', 'Shows the help message', (msg, extra) => {
+commands.register(this.command, '(.*)', 'Shows the help message', async (msg, extra) => {
   const module = loader.getPlugin(extra[1]);
   if (module) {
     const em = new discord.RichEmbed();
     const moduleCommands = commands.getCommands(module.command);
+    const prefix = await commands.getPrefix(msg.guild.id);
     em.setTitle(`${module.name} | Help`);
     moduleCommands.forEach(c => {
-      em.addField(`${commands.getPrefix()}${c.command} ${c.params}`, `${c.description}`)
+      em.addField(`${prefix}${c.command} ${c.params}`, `${c.description}`)
     });
     return msg.channel.send(em);
   } else {
