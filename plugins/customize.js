@@ -18,13 +18,12 @@ commands.register(this.command, 'game (.*)', 'Change the bots game', (msg, extra
   msg.reply(`Set game to: ${extra[1]}`);
 });
 
-/*
-Add back once permissions done. 
-commands.register(this.command, ['command', 'prefix', '(.*)'], 'Change the bots command Prefix', (msg, extra) => {
-  commands.setPrefix(extra[1]);
-  msg.reply(`Set prefix to: ${extra[1]}`);
+
+commands.register(this.command, ['command', 'prefix', '(.*)'], 'Change the bots command Prefix', async (msg, extra) => {
+  const changed = await commands.setPrefix(msg.guild.id, extra[1]);
+  changed ? msg.reply(`Set prefix to: ${extra[1]}`) : msg.reply(`Could not update the prefix, did you run {!install}?`);
 });
-*/
+
 
 exports.name = 'Customize';
 exports.version = '1.0.0';

@@ -1,5 +1,6 @@
 const { loader } = require('@bot');
 const { discord, client } = require('@bot').client;
+const { Server, Configuration } = require('@bot').database;
 
 const registeredCommands = [];
 let prefix = '!';
@@ -31,22 +32,31 @@ exports.register = (command, params, description, response) => {
   }
 };
 
-exports.setPrefix = (newPrefix) => {
-  prefix = newPrefix;
+exports.setPrefix = async (serverID, newPrefix) => {
+  const server = await Server.findOne({ serverID });
+  const config = await Configuration.updateOne({ server }, { prefix: newPrefix });
+  return config ? config.n >= 1 : false;
 };
 
 exports.getCommands = command => registeredCommands.filter(e => e.command === command);
 
+exports.getPrefix = async (serverID) => {
+  const server = await Server.findOne({ serverID });
+  const config = await Configuration.findOne({ server });
+  return config ? config.prefix : prefix;
+};
+
 exports.getAllCommands = () => registeredCommands;
 
-client.on('message', (msg) => {
+client.on('message', async (msg) => {
   const message = msg.content;
+  const serverPrefix = await this.getPrefix(msg.guild.id);
   for (let i = 0; i < registeredCommands.length; i += 1) {
     const command = registeredCommands[i];
-    const r = new RegExp(`${prefix}${command.compiled}`);
+    const r = new RegExp(`\\${serverPrefix}${command.compiled}`);
     const match = message.match(r) ? message.match(r) : [];
-    const plugin = loader.getPlugin(match[1]);
-    if (plugin.state && (`${prefix}${command.compiled}` === message || match[1])) {
+    const plugin = loader.commandState(command);
+    if (plugin && (`${serverPrefix}${command.compiled}` === message || match[1])) {
       return command.response(msg, match);
     }
   }

@@ -3,12 +3,13 @@ const { discord } = require('@bot').client;
 
 exports.command = 'help';
 
-commands.register(this.command, '', 'Shows the help message', (msg) => {
+commands.register(this.command, '', 'Shows the help message', async (msg) => {
   const modules = loader.getPlugins();
   const em = new discord.RichEmbed();
+  const prefix = await commands.getPrefix(msg.guild.id);
   modules.forEach(m => {
     if (m.discrim) {
-      em.addField(`${commands.getPrefix()}${this.command} ${m.discrim}`, `Displays help for ${m.name}`);
+      em.addField(`${prefix}${this.command} ${m.discrim}`, `Displays help for ${m.name}`);
     }
   });
   msg.reply(em);
@@ -25,7 +26,7 @@ commands.register(this.command, '(.*)', 'Shows the help message', (msg, extra) =
     });
     return msg.channel.send(em);
   } else {
-    return msg.channel.send(`Are you sure that \`${discrim}\` is a valid plugin descriminator`);
+    return msg.channel.send(`Are you sure that \`${extra[1]}\` is a valid plugin descriminator`);
   }
 });
 
