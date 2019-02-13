@@ -71,7 +71,6 @@ client.on('message', async (msg) => {
     const plugin = loader.fromCommand(command);
     const userRoles = msg.member.roles.array();
     const allowedRoles = getAllowedRoles(serverPermissions, userRoles, plugin);
-    console.log(allowedRoles);
     if (pluginState && (`${serverPrefix}${command.compiled}` === message || match[1]) && (plugin.ignorePermissions || allowedRoles.length >= 1)) {
       return command.response(msg, match);
     }
