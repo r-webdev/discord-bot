@@ -18,10 +18,13 @@ const Server = mongoose.model('Server', {
 
 const User = mongoose.model('User', {
   server: { type: Schema.Types.ObjectId, ref: 'Server' },
-  name: String,
-  descrim: Number,
-  warnings: Number,
-  isAdmin: Boolean
+  descrim: Number
+});
+
+const UserWarning = mongoose.model('UserWarnings', {
+  user: { type: Schema.Types.ObjectId, ref: 'User' },
+  warning: String,
+  warner: Number
 });
 
 const Configuration = mongoose.model('Configuration', {
@@ -30,6 +33,16 @@ const Configuration = mongoose.model('Configuration', {
   adminRole: Number
 });
 
-module.exports = {
-  Server, User, Configuration, database
-};
+const ModeratorRole = mongoose.model('ModeratorRole', {
+  server: { type: Schema.Types.ObjectId, ref: 'Server' },
+  roleID: Number
+});
+
+const Permission = mongoose.model('Permission', {
+  server: { type: Schema.Types.ObjectId, ref: 'Server' },
+  module: String,
+  roleID: Number,
+  permission: String
+});
+
+module.exports = { Server, User, UserWarning, Permission, Configuration, ModeratorRole, database };

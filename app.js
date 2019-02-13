@@ -17,7 +17,7 @@ loader.init();
 
 const PORT = process.env.PORT;
 const server = http.createServer((request, response) => {
-	response.writeHead(302, {"Location": process.env.DISCORD_REDIRECT_URL});
+	response.writeHead(302, { "Location": process.env.DISCORD_REDIRECT_URL });
 	response.end("Redirecting...");
 });
 server.listen(PORT, () => console.log("Server is listening on port %s", PORT));
