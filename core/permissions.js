@@ -2,26 +2,28 @@ const { Server, Permission } = require('@bot').database;
 
 module.exports.checkPermissions = async (serverID, roleID, plugin) => {
   const server = await Server.findOne({ serverID }).exec();
-  const rolePermissions = await Permission.find({
+  const rolePermissions = await Permission.findOne({
     server,
     roleID,
     plugin,
-  });
+  }).exec();
+  if (rolePermissions) return true;
+  return false;
+};
 
-  if (rolePermissions) {
-    console.log('Has Permission');
-  }
+module.exports.getServerPermissions = async (serverID) => {
+  const server = await Server.findOne({ serverID }).exec();
+  const serverPermissions = await Permission.find({ server }).exec();
+  return serverPermissions;
 };
 
 module.exports.addPermission = async (serverID, roleID, plugin) => {
   const server = await Server.findOne({ serverID }).exec();
-  Permission.create({
-    server,
-    roleID,
-    plugin,
-  }, (err, permission) => {
-    if (err) throw err;
-    return permission;
-  });
+  const permissionExists = await Permission.findOne({ server, roleID, plugin }).exec();
+  if (permissionExists) {
+    return false;
+  }
+  const permission = await Permission.create({ server, roleID, plugin });
+  if (permission) return true;
   return false;
 };

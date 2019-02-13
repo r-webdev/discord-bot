@@ -38,3 +38,5 @@ exports.commandState = ({ command }) => {
 };
 
 exports.getPlugin = discrim => loadedPlugins.filter(m => m.discrim === discrim)[0];
+
+exports.fromCommand = ({ command }) => loadedPlugins.filter(m => m.command === command)[0];

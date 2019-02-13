@@ -32,3 +32,4 @@ commands.register(this.command, '(.*)', 'Shows the help message', async (msg, ex
 
 exports.name = 'Help';
 exports.state = true;
+exports.ignorePermissions = true;
