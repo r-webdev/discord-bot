@@ -1,4 +1,4 @@
-const { loader } = require('@bot');
+const { loader, permissions } = require('@bot');
 const { client } = require('@bot').client;
 const { Server, Configuration } = require('@bot').database;
 
@@ -45,15 +45,32 @@ exports.getPrefix = async (serverID) => {
 
 exports.getAllCommands = () => registeredCommands;
 
+const getAllowedRoles = (serverPermissions, userRoles, plugin) => {
+  // eslint-disable-next-line radix
+  const roles = userRoles.flatMap(x => parseInt(x.id));
+  const allowedRoles = [];
+  for (let x = 0; x < serverPermissions.length; x += 1) {
+    const perm = serverPermissions[x];
+    if (perm.plugin === plugin.discrim && roles.includes(perm.roleID)) {
+      allowedRoles.push(perm.roleID);
+    }
+  }
+  return allowedRoles;
+};
+
 client.on('message', async (msg) => {
   const message = msg.content;
   const serverPrefix = await this.getPrefix(msg.guild.id);
+  const serverPermissions = await permissions.getServerPermissions(msg.guild.id);
   for (let i = 0; i < registeredCommands.length; i += 1) {
     const command = registeredCommands[i];
-    const r = new RegExp(`\\${serverPrefix}${command.compiled}`);
-    const match = message.match(r) ? message.match(r) : [];
-    const plugin = loader.commandState(command);
-    if (plugin && (`${serverPrefix}${command.compiled}` === message || match[1])) {
+    const regex = new RegExp(`\\${serverPrefix}${command.compiled}`);
+    const match = message.match(regex) ? message.match(regex) : [];
+    const pluginState = loader.commandState(command);
+    const plugin = loader.fromCommand(command);
+    const userRoles = msg.member.roles.array();
+    const allowedRoles = getAllowedRoles(serverPermissions, userRoles, plugin);
+    if (pluginState && (`${serverPrefix}${command.compiled}` === message || match[1]) && (plugin.ignorePermissions || allowedRoles >= 1)) {
       return command.response(msg, match);
     }
   }

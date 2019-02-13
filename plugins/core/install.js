@@ -1,5 +1,5 @@
 const { client } = require('@bot').client;
-const { Server, Configuration } = require('@bot').database;
+const { Server, Configuration, Permission } = require('@bot').database;
 
 exports.command = 'setup';
 
@@ -17,6 +17,12 @@ client.on('guildCreate', async (guild) => {
     Server.create({ serverID }, (serverError, newServer) => {
       if (serverError) throw serverError;
       Configuration.create({ server: newServer, prefix: '!', adminRole }, (configError) => {
+        if (configError) throw configError;
+      });
+      Permission.create({ server: newServer, roleID: adminRole, plugin: 'plugins' }, (configError) => {
+        if (configError) throw configError;
+      });
+      Permission.create({ server: newServer, roleID: adminRole, plugin: 'permissions' }, (configError) => {
         if (configError) throw configError;
       });
     });
