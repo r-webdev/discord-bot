@@ -17,6 +17,7 @@ const checkCommand = (command, body) => {
 
 exports.register = (command, params, description, response) => {
   const compiled = params === '' ? `${command}` : `${command} ${params}`;
+  const commandRegex = compiled;
 
   if (checkCommand(command, params)) {
     registeredCommands.push({
@@ -25,6 +26,7 @@ exports.register = (command, params, description, response) => {
       description,
       response,
       compiled,
+      commandRegex,
     });
   }
 };
@@ -70,7 +72,8 @@ client.on('message', async (msg) => {
     const plugin = loader.fromCommand(command);
     const userRoles = msg.member.roles.array();
     const allowedRoles = getAllowedRoles(serverPermissions, userRoles, plugin);
-    if (pluginState && (`${serverPrefix}${command.compiled}` === message || match[1]) && (plugin.ignorePermissions || allowedRoles >= 1)) {
+    console.log(allowedRoles);
+    if (pluginState && (`${serverPrefix}${command.compiled}` === message || match[1]) && (plugin.ignorePermissions || allowedRoles.length >= 1)) {
       return command.response(msg, match);
     }
   }
