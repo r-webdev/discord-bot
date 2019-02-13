@@ -3,7 +3,9 @@ const { Server, Configuration } = require('@bot').database;
 
 exports.command = 'setup';
 
-const roleReducer = (lastRole, curRole) => lastRole.permissions < curRole.permissions ? curRole : lastRole;
+const roleReducer = (lastRole, curRole) => {
+  return lastRole.permissions < curRole.permissions ? curRole : lastRole;
+};
 
 client.on('guildCreate', async (guild) => {
   const serverID = guild.id;

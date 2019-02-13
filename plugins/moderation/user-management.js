@@ -7,13 +7,13 @@ commands.register(this.command, '', 'Customize Help', (msg) => {
   msg.reply('Customize the bot with other commands!');
 });
 
-commands.register(this.command, 'info (.*)', 'Customize Help', (msg, extra) => {
+commands.register(this.command, 'info (.*)', 'Customize Help', (msg) => {
   const em = new discord.RichEmbed();
   const user = msg.mentions.users.first();
   em.setTitle(`User Information for [${user.username}]`);
-  em.setThumbnail(user.displayAvatarURL)
-  em.addField("User ID", user.id);
-  em.addField("Joined At", user.createdAt);
+  em.setThumbnail(user.displayAvatarURL);
+  em.addField('User ID', user.id);
+  em.addField('Joined At', user.createdAt);
   msg.reply(em);
 });
 

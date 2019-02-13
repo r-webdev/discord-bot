@@ -22,7 +22,11 @@ commands.register(this.command, 'game (.*)', 'Change the bots game', (msg, extra
 
 commands.register(this.command, 'command prefix (.*)', 'Change the bots command Prefix', async (msg, extra) => {
   const changed = await commands.setPrefix(msg.guild.id, extra[1]);
-  changed ? msg.reply(`Set prefix to: ${extra[1]}`) : msg.reply(`Could not update the prefix, did you run {!install}?`);
+  if (changed) {
+    msg.reply(`Set prefix to: ${extra[1]}`);
+  } else {
+    msg.reply('Error setting prefix :(');
+  }
 });
 
 
