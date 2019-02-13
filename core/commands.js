@@ -15,7 +15,7 @@ const checkCommand = (command, body) => {
   return true;
 };
 
-exports.register = (command, params, description, response) => {
+exports.register = (command, params, usage, description, response) => {
   const compiled = params === '' ? `${command}` : `${command} ${params}`;
 
   if (checkCommand(command, params)) {
@@ -25,6 +25,7 @@ exports.register = (command, params, description, response) => {
       description,
       response,
       compiled,
+      usage,
     });
   }
 };
@@ -60,6 +61,8 @@ const getAllowedRoles = (serverPermissions, userRoles, plugin) => {
 
 client.on('message', async (msg) => {
   const message = msg.content;
+  if (!msg.guild && msg.author.id !== client.user.id) return msg.reply('I do not work in DMs');
+  if (msg.author.id === client.user.id) return false;
   const serverPrefix = await this.getPrefix(msg.guild.id);
   const serverPermissions = await permissions.getServerPermissions(msg.guild.id);
   for (let i = 0; i < registeredCommands.length; i += 1) {
@@ -70,9 +73,9 @@ client.on('message', async (msg) => {
     const plugin = loader.fromCommand(command);
     const userRoles = msg.member.roles.array();
     const allowedRoles = getAllowedRoles(serverPermissions, userRoles, plugin);
-    if (pluginState && (`${serverPrefix}${command.compiled}` === message || match[1]) && (plugin.ignorePermissions || allowedRoles >= 1)) {
+    if (pluginState && (`${serverPrefix}${command.compiled}` === message || match[1]) && (plugin.ignorePermissions || allowedRoles.length >= 1)) {
       return command.response(msg, match);
     }
   }
-  return null;
+  return false;
 });

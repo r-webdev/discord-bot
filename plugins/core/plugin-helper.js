@@ -3,7 +3,7 @@ const { discord } = require('@bot').client;
 
 exports.command = 'plugins';
 
-commands.register(this.command, 'toggle (.*)', 'Toggle a plugin.', (msg, extra) => {
+commands.register(this.command, 'toggle (.*)', 'plugins toggle <plugin-discriminator>', 'Toggle a plugin.', (msg, extra) => {
   const module = loader.getPlugin(extra[1]);
   if (module) {
     module.toggle();
@@ -13,7 +13,7 @@ commands.register(this.command, 'toggle (.*)', 'Toggle a plugin.', (msg, extra) 
   }
 });
 
-commands.register(this.command, 'status (.*)', 'Check the status of a plugin', (msg, extra) => {
+commands.register(this.command, 'status (.*)', 'plugins status <plugin-discriminator>', 'Check the status of a plugin', (msg, extra) => {
   const module = loader.getPlugin(extra[1]);
   if (module) {
     msg.reply(`Plugin status: ${module.state}`);
@@ -22,7 +22,7 @@ commands.register(this.command, 'status (.*)', 'Check the status of a plugin', (
   }
 });
 
-commands.register(this.command, '', 'Get a list of plugin discriminators', (msg) => {
+commands.register(this.command, '', 'plugins', 'Get a list of plugin discriminators', (msg) => {
   const modules = loader.getPlugins();
   const em = new discord.RichEmbed();
   em.title = 'Plugins';
