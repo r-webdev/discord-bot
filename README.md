@@ -8,7 +8,7 @@ Community-made bot for the [/r/webdev+web_design Discord](https://discordapp.com
 
 This bot is done in Node.js with a MongoDB database backing it. Ensure you have a MongoDB database to use as a testing ground like [mLab](https://mlab.com/).
 
-Copy the .env.example file to .env and fill out the details, including a key to use for Discord (https://discordapp.com/developers/applications/) and
+Copy the .env.example file to .env and fill out the details, including a key to use for Discord (https://discordapp.com/developers/applications/), the [redirect URL](https://discordapp.com/developers/docs/topics/oauth2#bots), and
 the location of your MongoDB instance. Then run the following:
 
 ```bash
@@ -16,7 +16,7 @@ npm install
 npm start
 ```
 
-Once the bot is started up, [follow these instructions](https://discordapp.com/developers/docs/topics/oauth2#bots) to invite him to your server. 
+Once the bot is started up, visit `localhost:PORT` (the port is set in the .env file) to invite him to your server. 
 
 ## Official Plugins
 
