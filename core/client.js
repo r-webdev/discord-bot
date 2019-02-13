@@ -6,7 +6,7 @@ const client = new Discord.Client();
 const key = process.env.DISCORD_KEY;
 
 client.on('ready', () => {
-  client.user.setActivity("cowsay");
+  client.user.setActivity('cowsay');
   log('notify', 'Bot Started');
 });
 

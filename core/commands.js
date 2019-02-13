@@ -1,9 +1,9 @@
 const { loader } = require('@bot');
-const { discord, client } = require('@bot').client;
+const { client } = require('@bot').client;
 const { Server, Configuration } = require('@bot').database;
 
 const registeredCommands = [];
-let prefix = '!';
+const prefix = '!';
 
 const checkCommand = (command, body) => {
   for (let i = 0; i < registeredCommands.length; i += 1) {
@@ -14,9 +14,6 @@ const checkCommand = (command, body) => {
   }
   return true;
 };
-
-// Cleanest way to allow [] for param chaining...
-Array.prototype.toString = function () { return this.join(' '); };
 
 exports.register = (command, params, description, response) => {
   const compiled = params === '' ? `${command}` : `${command} ${params}`;
