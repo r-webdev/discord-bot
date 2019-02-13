@@ -23,4 +23,6 @@ exports.version = '1.0.0';
 exports.description = 'Basic Ping Pong Plugin';
 exports.discrim = 'pingpong';
 exports.state = true;
-exports.toggle = () => this.state = !this.state;
+exports.toggle = () => {
+  this.state = !this.state;
+};

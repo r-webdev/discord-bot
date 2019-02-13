@@ -25,8 +25,8 @@ commands.register(this.command, 'status (.*)', 'Check the status of a plugin', (
 commands.register(this.command, '', 'Get a list of plugin discriminators', (msg) => {
   const modules = loader.getPlugins();
   const em = new discord.RichEmbed();
-  em.title = "Plugins";
-  modules.forEach(m => {
+  em.title = 'Plugins';
+  modules.forEach((m) => {
     em.addField(`Name: ${m.name}`, `Discriminator: ${m.discrim || 'none'}`);
   });
   msg.reply(em);

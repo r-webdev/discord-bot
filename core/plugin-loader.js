@@ -6,10 +6,12 @@ const { logger } = require('@bot');
 const loadedPlugins = [];
 
 const load = (path) => {
-  fs.readdir(path, (err, files) => {
-    files.forEach(f => {
+  fs.readdir(path, (readError, files) => {
+    if (readError) throw readError;
+    files.forEach((f) => {
       const fPath = PATH.join(path, f);
-      fs.lstat(fPath, (err, stat) => {
+      fs.lstat(fPath, (lstatErr, stat) => {
+        if (lstatErr) throw lstatErr;
         if (stat.isDirectory()) {
           load(fPath);
         } else {
@@ -31,4 +33,4 @@ exports.getPlugins = () => loadedPlugins;
 
 exports.commandState = ({ command }) => loadedPlugins.filter(m => m.command === command && m.state === true).length > 0;
 
-exports.getPlugin = (discrim) => loadedPlugins.filter(m => m.discrim === discrim)[0];
+exports.getPlugin = discrim => loadedPlugins.filter(m => m.discrim === discrim)[0];

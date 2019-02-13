@@ -22,4 +22,6 @@ exports.version = '1.0.0';
 exports.description = 'Basic User Management Plugin';
 exports.discrim = 'usermanagement';
 exports.state = true;
-exports.toggle = () => this.state = !this.state;
+exports.toggle = () => {
+  this.state = !this.state;
+};

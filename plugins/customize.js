@@ -31,4 +31,6 @@ exports.version = '1.0.0';
 exports.description = 'Customize the bot';
 exports.discrim = 'customize';
 exports.state = true;
-exports.toggle = () => this.state = !this.state;
+exports.toggle = () => {
+  this.state = !this.state;
+};
