@@ -25,7 +25,6 @@ commands.register(this.command, '([^s]+) (.*)', 'warn <@user> <reason>', 'Warn a
   const serverID = msg.guild.id;
   const server = await Server.findOne({ serverID }).exec();
   const warnedUser = msg.mentions.users.first();
-  console.log(warnedUser.id);
   const warning = extra[2];
   const warner = msg.author.id;
   if (server && warnedUser) {
@@ -34,28 +33,25 @@ commands.register(this.command, '([^s]+) (.*)', 'warn <@user> <reason>', 'Warn a
       const newUser = await User.create({ server, discrim: warnedUser.id });
       UserWarning.create({ user: newUser, warning, warner }, (warningError) => {
         if (warningError) throw warningError;
-        msg.reply(`Warned {${extra[1]}} for {${extra[2]}}`);
-        warnedUser.send(`You have been warned for {${extra[2]}}`);
+        msg.channel.send(`Warned {${extra[1]}} for {${extra[2]}}`);
+        return warnedUser.send(`You have been warned for {${extra[2]}}`);
       });
-      return true;
     }
     UserWarning.create({ user, warning, warner }, (warningError) => {
       if (warningError) throw warningError;
-      msg.reply(`Warned {${extra[1]}} for {${extra[2]}}`);
-      warnedUser.send(`You have been warned for {${extra[2]}}`);
+      msg.channel.send(`Warned {${extra[1]}} for {${extra[2]}}`);
+      return warnedUser.send(`You have been warned for {${extra[2]}}`);
     });
-    return true;
   }
+  return msg.channel.send('Cannot warn, error?');
 });
 
-commands.register(this.command, 'list (.*)', 'warn list <@user>', 'List a users warnings', async (msg, extra) => {
+commands.register(this.command, 'list (.*)', 'warn list <@user>', 'List a users warnings', async (msg) => {
   const serverID = msg.guild.id;
   const server = await Server.findOne({ serverID }).exec();
   if (server) {
     const targetUser = msg.mentions.users.first();
-    console.log(targetUser.id);
     const user = await User.findOne({ server, discrim: targetUser.id }).exec();
-    console.log(`user: ${user}`);
     const warnings = await UserWarning.find({ user }).exec();
     if (warnings) {
       const em = new discord.RichEmbed();
