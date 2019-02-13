@@ -3,6 +3,7 @@ const { Server, Configuration } = require('@bot').database;
 
 exports.command = 'setup';
 
+// eslint-disable-next-line arrow-body-style
 const roleReducer = (lastRole, curRole) => {
   return lastRole.permissions < curRole.permissions ? curRole : lastRole;
 };

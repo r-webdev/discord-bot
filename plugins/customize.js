@@ -7,9 +7,9 @@ commands.register(this.command, '', 'Customize Help', async (msg) => {
   const pluginCommands = commands.getCommands('customize');
   const em = new discord.RichEmbed();
   const prefix = await commands.getPrefix();
-  em.setTitle(`Customize | Help`);
-  pluginCommands.forEach(c => {
-    em.addField(`${prefix}${c.command} ${c.params}`, `${c.description}`)
+  em.setTitle('Customize | Help');
+  pluginCommands.forEach((c) => {
+    em.addField(`${prefix}${c.command} ${c.params}`, `${c.description}`);
   });
   msg.channel.send(em);
 });

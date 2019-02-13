@@ -16,6 +16,10 @@ const database = require('./database');
 
 core.hook('database', database);
 
+const permissions = require('./permissions');
+
+core.hook('permissions', permissions);
+
 const commands = require('./commands');
 
 core.hook('commands', commands);
