@@ -19,13 +19,13 @@ const Server = mongoose.model('Server', {
 
 const User = mongoose.model('User', {
   server: { type: Schema.Types.ObjectId, ref: 'Server' },
-  descrim: Number,
+  discrim: String,
 });
 
 const UserWarning = mongoose.model('UserWarnings', {
   user: { type: Schema.Types.ObjectId, ref: 'User' },
   warning: String,
-  warner: Number,
+  warner: String,
 });
 
 const Configuration = mongoose.model('Configuration', {

@@ -61,6 +61,8 @@ const getAllowedRoles = (serverPermissions, userRoles, plugin) => {
 
 client.on('message', async (msg) => {
   const message = msg.content;
+  if (!msg.guild && msg.author.id !== client.user.id) return msg.reply('I do not work in DMs');
+  if (msg.author.id === client.user.id) return false;
   const serverPrefix = await this.getPrefix(msg.guild.id);
   const serverPermissions = await permissions.getServerPermissions(msg.guild.id);
   for (let i = 0; i < registeredCommands.length; i += 1) {
@@ -75,5 +77,5 @@ client.on('message', async (msg) => {
       return command.response(msg, match);
     }
   }
-  return null;
+  return false;
 });
