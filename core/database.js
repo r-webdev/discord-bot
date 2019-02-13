@@ -1,7 +1,7 @@
 const { log } = require('@bot').logger;
 const mongoose = require('mongoose');
 
-const [Schema] = mongoose.Schema;
+const { Schema } = mongoose;
 const database = mongoose.connection;
 
 mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true });
@@ -41,9 +41,8 @@ const ModeratorRole = mongoose.model('ModeratorRole', {
 
 const Permission = mongoose.model('Permission', {
   server: { type: Schema.Types.ObjectId, ref: 'Server' },
-  module: String,
+  plugin: String,
   roleID: Number,
-  permission: String,
 });
 
 module.exports = {

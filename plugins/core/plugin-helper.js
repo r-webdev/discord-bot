@@ -32,5 +32,5 @@ commands.register(this.command, '', 'Get a list of plugin discriminators', (msg)
   msg.reply(em);
 });
 
-exports.name = 'Module Loader';
+exports.name = 'Plugin Loader';
 exports.state = true;
