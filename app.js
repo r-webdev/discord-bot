@@ -16,9 +16,9 @@ log('notify', `MONGO: [${process.env.MONGODB_URL}]`);
 loader.init();
 
 // Simple HTTP server to redirect to Discord bot auth URL.
-const PORT = process.env.PORT;
+const [PORT] = process.env.PORT;
 const server = http.createServer((request, response) => {
-	response.writeHead(302, {"Location": process.env.DISCORD_REDIRECT_URL});
-	response.end("Redirecting...");
+  response.writeHead(302, { Location: process.env.DISCORD_REDIRECT_URL });
+  response.end('Redirecting...');
 });
-server.listen(PORT, _ => log('notify', "Redirect listening on port " + PORT));
+server.listen(PORT, log('notify', `Port: {${PORT}}`));
