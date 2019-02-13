@@ -1,7 +1,7 @@
 // Load configuration.
 require('dotenv').config();
 
-//load @bot hooks.
+// load @bot hooks.
 require('./core/bootstrap');
 
 // Load HTTP server for redirecting to auth URL.

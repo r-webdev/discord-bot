@@ -6,6 +6,7 @@ const database = mongoose.connection;
 
 mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true });
 
+// eslint-disable-next-line no-console
 database.on('error', console.error.bind(console, 'connection error:'));
 
 database.once('open', () => {
