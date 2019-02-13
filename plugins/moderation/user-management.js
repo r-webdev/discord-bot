@@ -3,11 +3,18 @@ const { discord } = require('@bot').client;
 
 exports.command = 'mod';
 
-commands.register(this.command, '', 'Customize Help', (msg) => {
-  msg.reply('Customize the bot with other commands!');
+commands.register(this.command, '', 'mod', 'User Management Help', async (msg) => {
+  const pluginCommands = commands.getCommands('mod');
+  const em = new discord.RichEmbed();
+  const prefix = await commands.getPrefix();
+  em.setTitle('Mod | Help');
+  pluginCommands.forEach((c) => {
+    em.addField(`${prefix}${c.usage}`, `${c.description}`);
+  });
+  msg.channel.send(em);
 });
 
-commands.register(this.command, 'info (.*)', 'Customize Help', (msg) => {
+commands.register(this.command, 'info (.*)', 'mod info <@user>', 'Get a users information', (msg) => {
   const em = new discord.RichEmbed();
   const user = msg.mentions.users.first();
   em.setTitle(`User Information for [${user.username}]`);

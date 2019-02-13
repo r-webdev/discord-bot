@@ -15,9 +15,8 @@ const checkCommand = (command, body) => {
   return true;
 };
 
-exports.register = (command, params, description, response) => {
+exports.register = (command, params, usage, description, response) => {
   const compiled = params === '' ? `${command}` : `${command} ${params}`;
-  const commandRegex = compiled;
 
   if (checkCommand(command, params)) {
     registeredCommands.push({
@@ -26,7 +25,7 @@ exports.register = (command, params, description, response) => {
       description,
       response,
       compiled,
-      commandRegex,
+      usage,
     });
   }
 };

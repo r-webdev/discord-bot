@@ -3,7 +3,7 @@ const { discord } = require('@bot').client;
 
 exports.command = 'permissions';
 
-commands.register(this.command, 'add (.*) (.*)', 'Add permission to a plugin to a role', async (msg, extra) => {
+commands.register(this.command, 'add (.*) (.*)', 'permissions add <plugin-discriminator> <@role>', 'Add permission to a plugin to a role', async (msg, extra) => {
   const plugin = loader.getPlugin(extra[1]);
   if (plugin) {
     const role = msg.mentions.roles.first();
@@ -16,7 +16,7 @@ commands.register(this.command, 'add (.*) (.*)', 'Add permission to a plugin to 
   return msg.reply('Error plugin does not exist..');
 });
 
-commands.register(this.command, '', 'Permissions help', async (msg) => {
+commands.register(this.command, '', 'permissions', 'Permissions help', async (msg) => {
   const pluginCommands = commands.getCommands('permissions');
   const em = new discord.RichEmbed();
   const prefix = await commands.getPrefix();
