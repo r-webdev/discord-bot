@@ -35,7 +35,6 @@ commands.register(this.command, '', 'music', 'Get the music help', async (msg) =
 
 commands.register(this.command, 'play (.*)', 'music play <song-name>/<youtube-url>', 'Change the bots game', async (msg, extra) => {
   const queue = serverQueue(msg.guild.id);
-
   if (msg.member.voiceChannel) {
     msg.member.voiceChannel.join().then((con) => {
       ytSearch(extra[1], (err, result) => {
@@ -51,8 +50,6 @@ commands.register(this.command, 'play (.*)', 'music play <song-name>/<youtube-ur
         queue.push({ title, url, requester });
         const stream = ytdl(`http://www.youtube.com${url}`, { filter: 'audioonly' });
         con.playStream(stream);
-        console.log(con);
-        console.log(stream);
         msg.channel.send(em);
       });
     });
