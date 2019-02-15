@@ -51,6 +51,7 @@ commands.register(this.command, 'play (.*)', 'music play <song-name>/<youtube-ur
         queue.push({ title, url, requester });
         const stream = ytdl(`http://www.youtube.com${url}`, { filter: 'audioonly' });
         con.playStream(stream);
+        console.log(con);
         console.log(stream);
         msg.channel.send(em);
       });
