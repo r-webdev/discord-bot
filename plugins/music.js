@@ -51,11 +51,11 @@ commands.register(this.command, 'play (.*)', 'music play <song-name>/<youtube-ur
         queue.push({ title, url, requester });
         const stream = ytdl(`http://www.youtube.com${url}`);
         con.playStream(stream);
-        return msg.channel.send(em);
+        console.log(stream);
+        msg.channel.send(em);
       });
     });
   }
-  return msg.reply('You need to join a voice channel first!');
 });
 
 exports.name = 'Music';
