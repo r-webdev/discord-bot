@@ -12,9 +12,7 @@
   "dependencies": {
     "discord.js": "^11.4.2",
     "dotenv": "^6.2.0",
-    "ffbinaries": "^1.1.1",
     "mongoose": "^5.4.10",
-    "opusscript": "0.0.6",
     "yt-search": "^0.4.1",
     "ytdl-core": "^0.29.1"
   }
