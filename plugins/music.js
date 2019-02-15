@@ -49,12 +49,14 @@ commands.register(this.command, 'play (.*)', 'music play <song-name>/<youtube-ur
         em.addField('Song Duration', timestamp);
         em.addField('Requester', requester);
         queue.push({ title, url, requester });
-        const stream = ytdl(`http://www.youtube.com${url}`);
+        const stream = ytdl(`http://www.youtube.com${url}`, { filter: 'audioonly' });
         con.playStream(stream);
         console.log(stream);
         msg.channel.send(em);
       });
     });
+  } else {
+    return msg.reply('You need to be in a voice channel');
   }
 });
 
