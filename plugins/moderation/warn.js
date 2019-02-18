@@ -36,14 +36,17 @@ commands.register(this.command, '([^s]+) (.*)', 'warn <@user> <reason>', 'Warn a
         msg.channel.send(`Warned {${extra[1]}} for {${extra[2]}}`);
         return warnedUser.send(`You have been warned for {${extra[2]}}`);
       });
+    } else {
+      UserWarning.create({ user, warning, warner }, (warningError) => {
+        if (warningError) throw warningError;
+        msg.channel.send(`Warned {${extra[1]}} for {${extra[2]}}`);
+        return warnedUser.send(`You have been warned for {${extra[2]}}`);
+      });
     }
-    UserWarning.create({ user, warning, warner }, (warningError) => {
-      if (warningError) throw warningError;
-      msg.channel.send(`Warned {${extra[1]}} for {${extra[2]}}`);
-      return warnedUser.send(`You have been warned for {${extra[2]}}`);
-    });
+  } else {
+    return msg.reply('Cannot warn, error?');
   }
-  return msg.channel.send('Cannot warn, error?');
+  return false;
 });
 
 commands.register(this.command, 'list (.*)', 'warn list <@user>', 'List a users warnings', async (msg) => {
