@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+ - "11"
+
+deploy:
+  provider: script
+  script: bash scripts/deploy.sh
+  on:
+    tags: true
