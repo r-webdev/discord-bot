@@ -47,8 +47,7 @@ exports.getPrefix = async (serverID) => {
 exports.getAllCommands = () => registeredCommands;
 
 const getAllowedRoles = (serverPermissions, userRoles, plugin) => {
-  // eslint-disable-next-line radix
-  const roles = userRoles.flatMap(x => parseInt(x.id));
+  const roles = userRoles.flatMap(x => parseInt(x.id, 10));
   const allowedRoles = [];
   for (let x = 0; x < serverPermissions.length; x += 1) {
     const perm = serverPermissions[x];
@@ -59,21 +58,34 @@ const getAllowedRoles = (serverPermissions, userRoles, plugin) => {
   return allowedRoles;
 };
 
+const isAdmin = async (serverID, userRoles) => {
+  const roles = userRoles.flatMap(x => parseInt(x.id, 10));
+  const server = await Server.findOne({ serverID }).exec();
+  const { adminRole } = await Configuration.findOne({
+    server,
+  }).select({
+    adminRole: 1,
+    _id: 0,
+  }).exec();
+  return roles.includes(adminRole);
+};
+
 client.on('message', async (msg) => {
   const message = msg.content;
   if (!msg.guild && msg.author.id !== client.user.id) return msg.reply('I do not work in DMs');
   if (msg.author.id === client.user.id) return false;
   const serverPrefix = await this.getPrefix(msg.guild.id);
   const serverPermissions = await permissions.getServerPermissions(msg.guild.id);
+  const userRoles = msg.member.roles.array();
+  const adminState = await isAdmin(msg.guild.id, userRoles);
   for (let i = 0; i < registeredCommands.length; i += 1) {
     const command = registeredCommands[i];
     const regex = new RegExp(`\\${serverPrefix}${command.compiled}`);
     const match = message.match(regex) ? message.match(regex) : [];
     const pluginState = loader.commandState(command);
     const plugin = loader.fromCommand(command);
-    const userRoles = msg.member.roles.array();
     const allowedRoles = getAllowedRoles(serverPermissions, userRoles, plugin);
-    if (pluginState && (`${serverPrefix}${command.compiled}` === message || match[1]) && (plugin.ignorePermissions || allowedRoles.length >= 1)) {
+    if (pluginState && (`${serverPrefix}${command.compiled}` === message || match[1]) && (plugin.ignorePermissions || adminState || allowedRoles.length >= 1)) {
       return command.response(msg, match);
     }
   }

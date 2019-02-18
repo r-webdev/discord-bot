@@ -33,7 +33,7 @@ commands.register(this.command, '', 'music', 'Get the music help', async (msg) =
   msg.channel.send(em);
 });
 
-commands.register(this.command, 'play (.*)', 'music play <song-name>/<youtube-url>', 'Change the bots game', async (msg, extra) => {
+commands.register(this.command, 'play (.*)', 'music play <song-name>/<youtube-url>', 'Change the bots game', (msg, extra) => {
   const queue = serverQueue(msg.guild.id);
   if (msg.member.voiceChannel) {
     msg.member.voiceChannel.join().then((con) => {
@@ -50,12 +50,13 @@ commands.register(this.command, 'play (.*)', 'music play <song-name>/<youtube-ur
         queue.push({ title, url, requester });
         const stream = ytdl(`http://www.youtube.com${url}`, { filter: 'audioonly' });
         con.playStream(stream);
-        msg.channel.send(em);
+        return msg.channel.send(em);
       });
     });
   } else {
     return msg.reply('You need to be in a voice channel');
   }
+  return true;
 });
 
 exports.name = 'Music';
