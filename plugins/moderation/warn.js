@@ -21,7 +21,7 @@ commands.register(this.command, '', 'warn', 'Warning Help', async (msg) => {
   warner: Number,
 */
 
-commands.register(this.command, '([^s]+) (.*)', 'warn <@user> <reason>', 'Warn a user for something', async (msg, extra) => {
+commands.register(this.command, '([^\\s]+) (.*)', 'warn <@user> <reason>', 'Warn a user for something', async (msg, extra) => {
   const serverID = msg.guild.id;
   const server = await Server.findOne({ serverID }).exec();
   const warnedUser = msg.mentions.users.first();
