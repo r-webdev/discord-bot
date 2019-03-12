@@ -45,6 +45,11 @@ const Permission = mongoose.model('Permission', {
   roleID: Number,
 });
 
+const JoinableRole = mongoose.model('JoinableRole', {
+  server: { type: Schema.Types.ObjectId, ref: 'Server' },
+  roleID: Number,
+});
+
 module.exports = {
   Server,
   User,
@@ -52,5 +57,6 @@ module.exports = {
   Permission,
   Configuration,
   ModeratorRole,
+  JoinableRole,
   database,
 };
