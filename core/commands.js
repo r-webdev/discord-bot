@@ -47,7 +47,7 @@ exports.getPrefix = async (serverID) => {
 exports.getAllCommands = () => registeredCommands;
 
 const getAllowedRoles = (serverPermissions, userRoles, plugin) => {
-  const roles = userRoles.flatMap(x => parseInt(x.id, 10));
+  const roles = userRoles.flatMap(x => x.id, 10);
   const allowedRoles = [];
   for (let x = 0; x < serverPermissions.length; x += 1) {
     const perm = serverPermissions[x];
@@ -59,7 +59,7 @@ const getAllowedRoles = (serverPermissions, userRoles, plugin) => {
 };
 
 const isAdmin = async (serverID, userRoles) => {
-  const roles = userRoles.flatMap(x => parseInt(x.id, 10));
+  const roles = userRoles.flatMap(x => x.id, 10);
   const server = await Server.findOne({ serverID }).exec();
   const { adminRole } = await Configuration.findOne({
     server,
