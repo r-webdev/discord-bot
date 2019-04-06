@@ -39,8 +39,8 @@ commands.register(this.command, 'addrole (.*)', 'mod addrole <rank>', 'Add a ran
         server,
         roleId,
       }).exec();
-      if (!joinable) {
-        const joinableRole = await JoinableRole.create({ server, roleID });
+      if (joinable.length == 0) {
+        const joinableRole = await JoinableRole.create({ server, roleId });
         if (joinableRole) {
           msg.reply(`Added joinable role  "${role}"`);
         }
