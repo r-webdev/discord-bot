@@ -13,15 +13,19 @@ client.on('message', async (msg) => {
 });
 
 commands.register(this.command, '', '', '', async (msg) => {
-  generator({
-    filename: path.join(__dirname, 'ngl.txt'),
-    model: {
-      maxLength: 100,
-      minLength: 50,
-    },
-  }, (err, sentence) => {
-    msg.channel.send(sentence);
-  });
+  try {
+    generator({
+      filename: path.join(__dirname, 'ngl.txt'),
+      model: {
+        maxLength: 100,
+        minLength: 50,
+      },
+    }, (err, sentence) => {
+      msg.channel.send(sentence);
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 exports.name = 'Naturl Language Generator';

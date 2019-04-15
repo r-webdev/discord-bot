@@ -4,6 +4,10 @@ const logger = require('./logger');
 
 core.hook('logger', logger);
 
+const utils = require('./utils');
+
+core.hook('utils', utils);
+
 const client = require('./client');
 
 core.hook('client', client);
