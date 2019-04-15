@@ -12,24 +12,17 @@ client.on('ready', () => {
 });
 
 const tryLogin = async () => {
-  try {
-    const t = await client.login(key);
-    if (t !== key) {
-      log('Notify', 'Trying To Recover');
-      await sleep(500);
-      await tryLogin();
-    }
-  } catch (err) {
-    if (err.code === 'ENOTFOUND') {
-      log('Notify', 'Trying To Recover');
-      await sleep(500);
-      await tryLogin();
-    }
+  const loginState = await client.login(key).catch(() => tryLogin());
+  if (loginState !== key) {
+    log('Notify', 'Trying To Recover');
+    await sleep(500);
+    await tryLogin();
   }
 };
 
 client.on('error', (error) => {
   if (error.message === 'read ECONNRESET' || error.message === 'getaddrinfo ENOTFOUND') {
+    client.destroy();
     tryLogin();
   }
 });
