@@ -1,0 +1,20 @@
+version: '3'
+services:
+  mongodb:
+     image: mongo
+  bot:
+    build: .
+    container_name: "webster"
+    command: npm start
+    volumes:
+      - .:/usr/app
+      - /usr/app/node_modules
+    ports:
+      - "3000:3000"
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+    environment:
+      PORT: 3000
+      MONGODB_URL: mongodb://mongodb:27017/webster

@@ -31,18 +31,23 @@ const UserWarning = mongoose.model('UserWarnings', {
 const Configuration = mongoose.model('Configuration', {
   server: { type: Schema.Types.ObjectId, ref: 'Server' },
   prefix: String,
-  adminRole: Number,
+  adminRole: String,
 });
 
 const ModeratorRole = mongoose.model('ModeratorRole', {
   server: { type: Schema.Types.ObjectId, ref: 'Server' },
-  roleID: Number,
+  roleID: String,
 });
 
 const Permission = mongoose.model('Permission', {
   server: { type: Schema.Types.ObjectId, ref: 'Server' },
   plugin: String,
-  roleID: Number,
+  roleID: String,
+});
+
+const JoinableRole = mongoose.model('JoinableRole', {
+  server: { type: Schema.Types.ObjectId, ref: 'Server' },
+  roleID: String,
 });
 
 module.exports = {
@@ -52,5 +57,6 @@ module.exports = {
   Permission,
   Configuration,
   ModeratorRole,
+  JoinableRole,
   database,
 };
