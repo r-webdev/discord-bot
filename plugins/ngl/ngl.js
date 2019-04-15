@@ -28,7 +28,7 @@ commands.register(this.command, '', '', '', async (msg) => {
   }
 });
 
-exports.name = 'Naturl Language Generator';
+exports.name = 'Natural Language Generator';
 exports.version = '1.0.0';
 exports.description = 'Generate Language';
 exports.discrim = 'ngl';
