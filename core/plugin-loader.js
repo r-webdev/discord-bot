@@ -14,7 +14,7 @@ const load = (path) => {
         if (lstatErr) throw lstatErr;
         if (stat.isDirectory()) {
           load(fPath);
-        } else {
+        } else if (fPath.includes('.js')) {
           // eslint-disable-next-line import/no-dynamic-require
           const mod = require(fPath); // eslint-disable-line global-require
           loadedPlugins.push(mod);

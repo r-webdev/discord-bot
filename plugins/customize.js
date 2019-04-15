@@ -19,7 +19,6 @@ commands.register(this.command, 'game (.*)', 'customize game <game-name>', 'Chan
   msg.reply(`Set game to: ${extra[1]}`);
 });
 
-
 commands.register(this.command, 'command prefix (.*)', 'customize command prefix <prefix>', 'Change the bots command Prefix', async (msg, extra) => {
   const changed = await commands.setPrefix(msg.guild.id, extra[1]);
   if (changed) {
@@ -28,7 +27,6 @@ commands.register(this.command, 'command prefix (.*)', 'customize command prefix
     msg.reply('Error setting prefix :(');
   }
 });
-
 
 exports.name = 'Customize';
 exports.version = '1.0.0';
