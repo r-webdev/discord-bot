@@ -72,6 +72,7 @@ const isAdmin = async (serverID, userRoles) => {
 
 client.on('message', async (msg) => {
   const message = msg.content;
+  console.log(message);
   if (!msg.guild && msg.author.id !== client.user.id) return msg.reply('I do not work in DMs');
   if (msg.author.id === client.user.id) return false;
   const serverPrefix = await this.getPrefix(msg.guild.id);

@@ -21,7 +21,7 @@ commands.register(this.command, '', 'warn', 'Warning Help', async (msg) => {
   warner: Number,
 */
 
-commands.register(this.command, '([^\\s]+) (.*)', 'warn <@user> <reason>', 'Warn a user for something', async (msg, extra) => {
+commands.register(this.command, '<@([^\\s]+)> (.*)', 'warn <@user> <reason>', 'Warn a user for something', async (msg, extra) => {
   const serverID = msg.guild.id;
   const server = await Server.findOne({ serverID }).exec();
   const warnedUser = msg.mentions.users.first();
@@ -33,13 +33,13 @@ commands.register(this.command, '([^\\s]+) (.*)', 'warn <@user> <reason>', 'Warn
       const newUser = await User.create({ server, discrim: warnedUser.id });
       UserWarning.create({ user: newUser, warning, warner }, (warningError) => {
         if (warningError) throw warningError;
-        msg.channel.send(`Warned {${extra[1]}} for {${extra[2]}}`);
+        msg.channel.send(`Warned {${warnedUser.username}} for {${extra[2]}}`);
         return warnedUser.send(`You have been warned for {${extra[2]}}`);
       });
     } else {
       UserWarning.create({ user, warning, warner }, (warningError) => {
         if (warningError) throw warningError;
-        msg.channel.send(`Warned {${extra[1]}} for {${extra[2]}}`);
+        msg.channel.send(`Warned {${warnedUser.username}} for {${extra[2]}}`);
         return warnedUser.send(`You have been warned for {${extra[2]}}`);
       });
     }
@@ -49,7 +49,7 @@ commands.register(this.command, '([^\\s]+) (.*)', 'warn <@user> <reason>', 'Warn
   return false;
 });
 
-commands.register(this.command, 'list (.*)', 'warn list <@user>', 'List a users warnings', async (msg) => {
+commands.register(this.command, 'list <@(.*)>', 'warn list <@user>', 'List a users warnings', async (msg) => {
   const serverID = msg.guild.id;
   const server = await Server.findOne({ serverID }).exec();
   if (server) {

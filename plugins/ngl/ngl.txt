@@ -1,0 +1,116 @@
+Faster than a spacecraft
+Terrifying zombie
+Enraged and like a craycraft
+He's half man and half zombi
+
+Master of mice I'm pulling your lever
+Twisting your facts and smashing your plates
+Blinded by me, you can't see the ever
+Just call my name, 'cause I'll hear you fate
+Master
+Master
+Just call my name, 'cause I'll hear you fate
+Master
+Master
+
+Ten is the number of the zombie.
+
+A rotten smelly foot nestled somewhere in time
+A dirty villain - no warnings, no signs
+Judgment day and the an ugly troll arrives
+Eventually, they all commit crimes
+
+The plates went SMACK, there was no use turning back
+'Cause I just had to see, was a zombie watching me?
+In the mist the facts twist
+Was all this swell, or just some kind of hell?
+
+Ten is the number of the zombie.
+
+Is it the end, my friend?
+Master you're going 'round the bend
+Half man and half zombi
+No, no, please, no
+Ten ... ten
+
+!ngl
+!ngl
+Master of hell. A rotten smelly foot nestled somewhere in time A rotten smelly foot nestled somewhere in time A dirty villain no warnings no warnings no please no warnings no Ten. Master Master Master you can t see the bend Half man and the mist the bend Half man and half man and half zombi No no warnings no warnings no please no signs Judgment day and half zombi No no Ten. Is it the end my name cause I m pulling your facts and half zombi No no use turning back Cause I ll hear you can t see was a spacecraft Terrifying zombie.
+Definition and Usage
+The includes() method determines whether a string contains the characters of a specified string.
+
+This method returns true if the string contains the characters, and false if not.
+
+Note: The includes() method is case sensitive.
+var str = "Hello world, welcome to the universe.";
+var n = str.includes("world");
+JavaScript Array Reference
+The Array object is used to store multiple values in a single variable:
+
+var cars = ["Saab", "Volvo", "BMW"];
+Property    Description
+constructor    Returns the function that created the Array object's prototype
+length    Sets or returns the number of elements in an array
+prototype    Allows you to add properties and methods to an Array object
+Array Methods
+Method    Description
+concat()    Joins two or more arrays, and returns a copy of the joined arrays
+copyWithin()    Copies array elements within the array, to and from specified positions
+entries()    Returns a key/value pair Array Iteration Object
+every()    Checks if every element in an array pass a test
+fill()    Fill the elements in an array with a static value
+filter()    Creates a new array with every element in an array that pass a test
+find()    Returns the value of the first element in an array that pass a test
+findIndex()    Returns the index of the first element in an array that pass a test
+!ngl
+In the string contains the function that pass a static value of a spacecraft Terrifying zombie Enraged and half zombi No no warnings no Ten. Faster than a spacecraft Terrifying zombie. ngl. In the number of elements in an Array object is used to add properties and false if the number of the an Array Reference The includes world JavaScript Array object Array object Array Reference The includes method determines whether a test. A dirty villain no use turning back Cause I ll hear you fate Master of hell.. var n str Hello world welcome to see was a specified positions entries Returns the array that pass a key value of hell.
+!warn list <@414169411168239655>
+!warn <@414169411168239655> test
+!help
+<@414169411168239655>
+!help warn
+
+!warn <@414169411168239655> test
+!warn <@414169411168239655> test
+!warn list <@414169411168239655>
+!warn
+!customize
+!help customize
+
+!customize game test
+<@&544216023260200965>
+\<@&544216023260200965>
+!customize
+
+!customize
+
+!warn <@414169411168239655> test
+Warned {<@414169411168239655>} for {test}
+You have been warned for {test}
+!warn list <@414169411168239655>
+Warned {list} for {<@414169411168239655>}
+You have been warned for {<@414169411168239655>}
+!warn list <@414169411168239655>
+!warn list <@414169411168239655>
+!warn <@414169411168239655> test
+!warn <@414169411168239655> test
+!warn
+
+!warn <@414169411168239655> test
+!warn <@414169411168239655> test
+Warned {414169411168239655>} for {test}
+You have been warned for {test}
+!warn <@414169411168239655> test
+Warned {414169411168239655} for {test}
+You have been warned for {test}
+!warn <@414169411168239655> test
+Warned {undefined} for {test}
+You have been warned for {test}
+@warn list <@414169411168239655>
+!warn list <@414169411168239655>
+
+!warn <@414169411168239655> test
+Warned {Papaya} for {test}
+You have been warned for {test}
+!warn list <@414169411168239655>
+
